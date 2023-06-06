@@ -4,17 +4,39 @@ import { Link, NavLink } from "react-router-dom";
 const NavBar = () => {
 
     const menuItems = <>
-        <li><NavLink
-                    to="/"
-                    className={({ isActive, }) =>
-                      isActive
-                        && "activeItem"
-                    }
-                  >
-                    Home
-                  </NavLink></li>
-        <li><Link to="">About</Link></li>
-        <li><Link to="">Contact</Link></li>
+        <li>
+            <NavLink
+                to="/"
+                className={({ isActive, }) =>
+                    isActive
+                    && "activeItem"
+                }
+            >
+                Home
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/a"
+                className={({ isActive, }) =>
+                    isActive
+                    && "activeItem"
+                }
+            >
+                About
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/c"
+                className={({ isActive, }) =>
+                    isActive
+                    && "activeItem"
+                }
+            >
+                Contact
+            </NavLink>
+        </li>
     </>
     return (
         <div className="navbar bg-base-100">
