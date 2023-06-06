@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const NavBar = () => {
 
     const menuItems = <>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to=""></Link></li>
-        <li><Link to=""></Link></li>
+        <li><NavLink
+                    to="/"
+                    className={({ isActive, }) =>
+                      isActive
+                        && "activeItem"
+                    }
+                  >
+                    Home
+                  </NavLink></li>
+        <li><Link to="">About</Link></li>
+        <li><Link to="">Contact</Link></li>
     </>
     return (
         <div className="navbar bg-base-100">
