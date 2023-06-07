@@ -3,8 +3,9 @@ import SectionTitle from "../../../components/SectionTitle";
 
 const PopularClasses = () => {
     return (
-        <div>
-            <SectionTitle title={"Popular Classes"} subTitle={"something"}> </SectionTitle>
+        <div className="md:py-12">
+            <SectionTitle title={"Popular Classes"} subTitle={"Discover the Best Classes at Sports Camp 360"}> </SectionTitle>
+            <div></div>
         </div>
     );
 };
