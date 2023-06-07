@@ -1,10 +1,13 @@
+import Banner from "../banner/Banner";
+import PopularClasses from "../popularClasses/PopularClasses";
 
 
 const Home = () => {
     return (
-        <div>
-            <h2>This is home page..</h2>
-        </div>
+        <main>
+            <Banner />
+            <PopularClasses />
+        </main>
     );
 };
 

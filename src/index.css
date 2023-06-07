@@ -11,3 +11,13 @@
 .activeItem {
     @apply border-b-4 border-[#FB00D9] bg-slate-100
 }
+
+.slider-btn {
+    @apply h-4 w-4 rounded-full bg-white
+}
+.active-slider {
+    @apply opacity-100
+}
+.inactive-slider{
+    @apply opacity-50
+}
