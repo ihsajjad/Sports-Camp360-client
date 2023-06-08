@@ -5,9 +5,7 @@
 .sc-color{
     color: #FB00D9;
 }
-.menu a {
-    font-size: 20px;
-}
+
 .activeItem {
     @apply border-b-4 border-[#FB00D9] bg-slate-100
 }

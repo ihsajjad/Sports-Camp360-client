@@ -1,7 +1,10 @@
-import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import SocialSignIn from '../../shared/socialSignIn/SocialSignIn';
 
 const Register = () => {
+
+    
+    
     return (
         <div className="hero min-h-screen bg-base-200 md:py-12 py-5">
             <div className="card w-full max-w-sm shadow-2xl bg-base-100 border-[#fb00d979] border-2">
@@ -45,9 +48,10 @@ const Register = () => {
                     </div>
                 </form>
                 <div className="divider">OR</div>
-                <div className='text-center mb-4'>
-                    <div className='btn btn-circle text-xl text-[#fb00d9]'><FaGoogle /></div>
-                </div>
+
+                {/* Socials sign in including google */}
+                <SocialSignIn />
+
                 <p className="text-center mb-4">Already have an account? please <Link to="/register" className="underline text-[#fb00d9]">Login</Link></p>
             </div>
         </div>

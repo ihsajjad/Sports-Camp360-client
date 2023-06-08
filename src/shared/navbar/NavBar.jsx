@@ -1,7 +1,25 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const NavBar = () => {
+    const { logOut, user, loding } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Log Out successfull',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            })
+            .catch(() => { })
+    }
 
     const menuItems = <>
         <li>
@@ -9,34 +27,35 @@ const NavBar = () => {
                 to="/"
                 className={({ isActive, }) =>
                     isActive
-                    ? "activeItem" : ""
+                        ? "activeItem" : ""
                 }
             >
                 Home
             </NavLink>
         </li>
-        <li>
-            <NavLink
-                to="/login"
-                className={({ isActive, }) =>
-                    isActive
-                    ? "activeItem" : ""
-                }
-            >
-                Login
-            </NavLink>
-        </li>
-        <li>
-            <NavLink
-                to="/"
-                className={({ isActive, }) =>
-                    isActive
-                    ? "activeItem" : ""
-                }
-            >
-                Contact
-            </NavLink>
-        </li>
+        {
+            user
+                ?
+                <>
+                    <li >
+                        <button onClick={handleLogOut} className="btn btn-sm text-center">Log Out</button>
+                    </li>
+                </>
+                :
+                <>
+                    <li>
+                        <NavLink
+                            to="/login"
+                            className={({ isActive, }) =>
+                                isActive
+                                    ? "activeItem" : ""
+                            }
+                        >
+                            Login
+                        </NavLink>
+                    </li>
+                </>
+        }
     </>
     return (
         <div className="navbar bg-base-100">
@@ -57,7 +76,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <a onClick={handleLogOut} className="btn">Log Out</a>
             </div>
         </div>
     );
