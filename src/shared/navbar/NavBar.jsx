@@ -9,14 +9,14 @@ const NavBar = () => {
 
     const handleLogOut = () => {
         logOut()
-            .then(() => { 
+            .then(() => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: 'Log Out successful',
                     showConfirmButton: false,
                     timer: 1500
-                  })
+                })
             })
             .catch(() => { })
     }
@@ -38,25 +38,19 @@ const NavBar = () => {
                 ?
                 <>
                     <li >
-                        <button onClick={handleLogOut} className="btn btn-sm text-center">Log Out</button>
+
                     </li>
                 </>
                 :
                 <>
                     <li>
-                        <NavLink
-                            to="/login"
-                            className={({ isActive, }) =>
-                                isActive
-                                    ? "activeItem" : ""
-                            }
-                        >
-                            Login
-                        </NavLink>
+
                     </li>
                 </>
         }
     </>
+
+    console.log(user?.photoURL)
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -76,7 +70,19 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a onClick={handleLogOut} className="btn">Log Out</a>
+                {
+                    user
+                        ? <>
+                            <button onClick={handleLogOut} className="bg-base-200 px-3 py-2 rounded-lg text-center mr-3 border-2 border-[black] font-bold text-xs">Log Out</button>
+
+                            <div className="tooltip tooltip-bottom" data-tip={`${user?.displayName ? user.displayName : 'Profile'}`}>
+                                <img src={`${user?.photoURL ? user.photoURL : "https://i.postimg.cc/d1bNpF8n/user-solid.png"}`} className="h-12 w-12 rounded-full" />
+                            </div>
+                        </>
+                        : <Link to="/login">
+                            Login
+                        </Link>
+                }
             </div>
         </div>
     );
