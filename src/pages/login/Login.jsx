@@ -3,11 +3,13 @@ import SocialSignIn from "../../shared/socialSignIn/SocialSignIn";
 import Swal from "sweetalert2";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const Login = () => {
     const {signIn} = useContext(AuthContext);
     const [error, setError] = useState();
+    const [show, setShow] = useState(true);
     const navigate = useNavigate();
 
     // creating user using email and password
@@ -51,11 +53,14 @@ const Login = () => {
                         </label>
                         <input type="email" name="email" placeholder="email" className="input input-bordered" />
                     </div>
-                    <div className="form-control">
+                    <div className="form-control relative">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input type="password" name="password" placeholder="password" className="input input-bordered" />
+                        <input type={`${show ?"password" : "text"}`} name="password" placeholder="password" className="input input-bordered" />
+
+                        <span onClick={()=>setShow(!show)} className="absolute right-4 top-[52px] text-xl">{show ? <FaEye /> : <FaEyeSlash />}</span>
+
                         <label className="label">
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>

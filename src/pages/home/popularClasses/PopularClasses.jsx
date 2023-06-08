@@ -1,4 +1,5 @@
 import SectionTitle from "../../../components/SectionTitle";
+import SingleClass from "../../../components/SingleClass";
 
 
 const PopularClasses = () => {
@@ -58,20 +59,7 @@ const PopularClasses = () => {
             <SectionTitle title={"Popular Classes"} subTitle={"Discover the Best Classes at Sports Camp 360"}> </SectionTitle>
             <div className="grid md:grid-cols-3 grid-cols-1 gap-8 p-5">
                 {
-                    classes.map((item, i) => <div key={i} className=" border border-[#fb00d993] rounded-lg">
-                        <figure><img src={item.image} alt="car!" className="h-60 w-full rounded-t-lg" /></figure>
-                        <div className="p-4 space-y-2">
-                            <h2 className="card-title">{item.name}</h2>
-                            <p><span className="font-bold">Instructor : </span>{item.instructor}</p>
-                            <p><span className="font-bold">Available Seats :</span>  {item.availableSeats}</p>
-                            <p><span className="font-bold">Enrolled :</span>  {item.enrolledStudents}</p>
-                            <p><span className="font-bold">Price :</span> ${item.price}
-                            </p>
-                            <div className="card-actions justify-end">
-                                <button className="custom-btn-outline">Add to Cart</button>
-                            </div>
-                        </div>
-                    </div>)
+                    classes.map((singleClass, i) => <SingleClass key={i} singleClass={singleClass}/>)
                 }
             </div>
         </div>

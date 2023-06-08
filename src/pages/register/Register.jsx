@@ -5,7 +5,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
     const [error, setError] = useState();
     const navigate = useNavigate();
 
@@ -20,13 +20,13 @@ const Register = () => {
         const confirm = form.confirm.value;
 
         // Password validation
-        if(password !== confirm){
+        if (password !== confirm) {
             return setError("password doesn't match");
-        } else if (password.length < 6){
+        } else if (password.length < 6) {
             return setError('password should have minimum 6 Characters');
-        } else if(!/^(?=.*[0-9])/.test(password)){
+        } else if (!/^(?=.*[0-9])/.test(password)) {
             return setError('Password should have minimum one Number');
-        } else if(!/(?=.*[A-Z])/.test(password)){
+        } else if (!/(?=.*[A-Z])/.test(password)) {
             return setError("Password should have minimum one Capital letter");
         }
 
@@ -35,60 +35,78 @@ const Register = () => {
         } */
 
         createUser(email, password)
-        .then(result => {
-            form.reset();
-            const createdUser = result.user;
-            navigate('/', {replace: true})
-            if(createdUser){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Account created successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-            }
-        })
-        .catch(error => {
-            setError(error.message);
-        })
+            .then(result => {
+                form.reset();
+                const createdUser = result.user;
+                navigate('/', { replace: true })
+                if (createdUser) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Account created successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
-    
-    
+
+
     return (
-        <div className="hero min-h-screen bg-base-200 md:py-12 py-5">
-            <div className="card w-full max-w-sm shadow-2xl bg-base-100 border-[#fb00d979] border-2">
+        <div className="hero min-h-screen bg-base-200 md:py-12 p-5">
+            <div className="card md:w-2/4 w-full shadow-2xl bg-base-100 border-[#fb00d979] border-2">
+                <h2 className="text-3xl font-bold text-center mt-3">Please Register!</h2>
                 <form onSubmit={handleSignUp} className="card-body">
-                    <h2 className="text-3xl font-bold">Please Register!</h2>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
-                        <input type="text" name="name" placeholder="Full Name" className="input input-bordered" required />
+                    <div className='grid md:grid-cols-2 grid-cols-1 md:gap-3'>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name*</span>
+                            </label>
+                            <input type="text" name="name" placeholder="Full Name" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email*</span>
+                            </label>
+                            <input type="text" name="email" placeholder="email" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password*</span>
+                            </label>
+                            <input type="password" name="password" placeholder="password" className="input input-bordered" required/>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Confirm Password*</span>
+                            </label>
+                            <input type="password" name="confirm" placeholder="Confirm Password" className="input input-bordered" required/>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo Url*</span>
+                            </label>
+                            <input type="url" name="photo" placeholder="Photo URL" className="input input-bordered" required/>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Address</span>
+                            </label>
+                            <input type="text" name="address" placeholder="Address" className="input input-bordered" />
+                        </div>
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text">Gender</span>
                         </label>
-                        <input type="text" name="email" placeholder="email" className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
-                        <input type="password" name="password" placeholder="password" className="input input-bordered" />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Confirm Password</span>
-                        </label>
-                        <input type="password" name="confirm" placeholder="Confirm Password" className="input input-bordered" />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Profile</span>
-                        </label>
-                        <input type="file" name="profile" placeholder="Upload profile" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+                        <select name="gender" id="" className="input input-bordered">
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="custom">Custom</option>
+                        </select>
                     </div>
                     <p className="label text-red-600">
                         {error}

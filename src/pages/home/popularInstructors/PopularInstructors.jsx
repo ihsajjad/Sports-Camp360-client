@@ -1,7 +1,11 @@
+import Instructor from "../../../components/Instructor";
 import SectionTitle from "../../../components/SectionTitle";
+import useInstructorsData from "../../../hooks/useInstructorsData";
 
 
 const PopularInstructors = () => {
+    const [data] = useInstructorsData();
+    console.log(data);
     const instructors = [
         {
             "image": "https://rb.gy/xa5fu",
@@ -58,25 +62,7 @@ const PopularInstructors = () => {
             <SectionTitle title={"Popular Instructors"} subTitle={"Unlock Your Potential with Seasoned Experts!"}> </SectionTitle>
             <div className="grid md:grid-cols-3 grid-cols-1 gap-8 p-5">
                 {
-                    instructors.map((instructor, i) => <div key={i} className=" border border-[#fb00d993] rounded-lg">
-                        <figure><img src={instructor.image} alt="car!" className="h-60 w-full rounded-t-lg"/></figure>
-                        <div className="p-4 space-y-2">
-                            <h2 className="card-title">{instructor.name}</h2>
-                            <p><span className="font-bold">Email : </span>{instructor.email}</p>
-                            <p><span className="font-bold">Number of the Classes :</span>  {instructor.numClasses}</p>
-                            <p><span className="font-bold">Number of the Students:</span>  {instructor.numStudents}</p>
-                            <p><span className="font-bold">Name of the Classes:</span></p>
-                                <ul>
-                                    {
-                                        instructor?.classNames?.map((item, i) => <li key={i}>{i + 1}. {item}</li>)
-                                    }
-                                </ul>
-                            
-                            <div className="card-actions justify-end">
-                                <button className="custom-btn-outline">See Classes</button>
-                            </div>
-                        </div>
-                    </div>)
+                    instructors.map((instructor, i) => <Instructor key={i} instructor={instructor}/>)
                 }
             </div>
         </div>

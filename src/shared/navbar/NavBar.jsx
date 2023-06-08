@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 
 const NavBar = () => {
-    const { logOut, user, loding } = useContext(AuthContext);
+    const { logOut, user, loading } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
@@ -33,24 +33,47 @@ const NavBar = () => {
                 Home
             </NavLink>
         </li>
+        <li>
+            <NavLink
+                to="/instructors"
+                className={({ isActive, }) =>
+                    isActive
+                        ? "activeItem" : ""
+                }
+            >
+                Instructors
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to="/classes"
+                className={({ isActive, }) =>
+                    isActive
+                        ? "activeItem" : ""
+                }
+            >
+                Classes
+            </NavLink>
+        </li>
         {
             user
-                ?
+                &&
                 <>
                     <li >
-
-                    </li>
-                </>
-                :
-                <>
-                    <li>
-
+                        <NavLink
+                            to="/dashboard"
+                            className={({ isActive, }) =>
+                                isActive
+                                    ? "activeItem" : ""
+                            }
+                        >
+                            Dashboard
+                        </NavLink>
                     </li>
                 </>
         }
     </>
 
-    console.log(user?.photoURL)
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">

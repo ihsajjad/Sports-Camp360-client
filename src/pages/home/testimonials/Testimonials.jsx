@@ -1,5 +1,5 @@
 import SectionTitle from "../../../components/SectionTitle";
-import { FaStar } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaStar, FaTwitter } from "react-icons/fa";
 
 
 const Testimonials = () => {
@@ -36,6 +36,11 @@ const Testimonials = () => {
                             <FaStar />
                             <FaStar />
                             <FaStar />
+                        </div>
+                        <div className="flex gap-2 text-xl mt-4">
+                            <FaFacebook />
+                            <FaInstagram />
+                            <FaTwitter />
                         </div>
                     </div>)
                 }
