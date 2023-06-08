@@ -71,7 +71,7 @@ const NavBar = () => {
                 <Link to="/" className="text-2xl font-bold text-slate-600">Sports<span className="sc-color">Camp</span>360</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 md:space-x-3">
                     {menuItems}
                 </ul>
             </div>
