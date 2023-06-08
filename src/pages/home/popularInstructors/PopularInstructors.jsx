@@ -28,7 +28,7 @@ const PopularInstructors = () => {
             "numStudents": 25
         },
         {
-            "image": "instructor4.jpg",
+            "image": "https://rb.gy/j36x1",
             "name": "Sarah Thompson",
             "email": "sarah.thompson@example.com",
             "numClasses": 2,
@@ -36,7 +36,7 @@ const PopularInstructors = () => {
             "numStudents": 15
         },
         {
-            "image": "instructor5.jpg",
+            "image": "https://rb.gy/e0i75",
             "name": "David Wilson",
             "email": "david.wilson@example.com",
             "numClasses": 6,
@@ -44,7 +44,7 @@ const PopularInstructors = () => {
             "numStudents": 35
         },
         {
-            "image": "instructor6.jpg",
+            "image": "https://rb.gy/o5cyh",
             "name": "Jessica Anderson",
             "email": "jessica.anderson@example.com",
             "numClasses": 3,
@@ -56,10 +56,10 @@ const PopularInstructors = () => {
     return (
         <div className="md:py-12 py-8">
             <SectionTitle title={"Popular Instructors"} subTitle={"Unlock Your Potential with Seasoned Experts!"}> </SectionTitle>
-            <div className="grid md:grid-cols-3 grid-cols-1 gap-5 p-5">
+            <div className="grid md:grid-cols-3 grid-cols-1 gap-8 p-5">
                 {
                     instructors.map((instructor, i) => <div key={i} className=" border border-[#fb00d993] rounded-lg">
-                        <figure><img src={instructor.image} alt="car!" className="h-60 w-full"/></figure>
+                        <figure><img src={instructor.image} alt="car!" className="h-60 w-full rounded-t-lg"/></figure>
                         <div className="p-4 space-y-2">
                             <h2 className="card-title">{instructor.name}</h2>
                             <p><span className="font-bold">Email : </span>{instructor.email}</p>
