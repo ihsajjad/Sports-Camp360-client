@@ -9,7 +9,7 @@ const NavBar = () => {
                 to="/"
                 className={({ isActive, }) =>
                     isActive
-                    && "activeItem"
+                    ? "activeItem" : ""
                 }
             >
                 Home
@@ -20,7 +20,7 @@ const NavBar = () => {
                 to="/login"
                 className={({ isActive, }) =>
                     isActive
-                    && "activeItem"
+                    ? "activeItem" : ""
                 }
             >
                 Login
@@ -28,10 +28,10 @@ const NavBar = () => {
         </li>
         <li>
             <NavLink
-                to="/c"
+                to="/"
                 className={({ isActive, }) =>
                     isActive
-                    && "activeItem"
+                    ? "activeItem" : ""
                 }
             >
                 Contact

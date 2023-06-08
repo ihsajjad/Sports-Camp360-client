@@ -65,13 +65,13 @@ const PopularInstructors = () => {
                             <p><span className="font-bold">Email : </span>{instructor.email}</p>
                             <p><span className="font-bold">Number of the Classes :</span>  {instructor.numClasses}</p>
                             <p><span className="font-bold">Number of the Students:</span>  {instructor.numStudents}</p>
-                            <p><span className="font-bold">Name of the Classes:</span>
+                            <p><span className="font-bold">Name of the Classes:</span></p>
                                 <ul>
                                     {
-                                        instructor.classNames.map((item, i) => <li key={i}>{i + 1}. {item}</li>)
+                                        instructor?.classNames?.map((item, i) => <li key={i}>{i + 1}. {item}</li>)
                                     }
                                 </ul>
-                            </p>
+                            
                             <div className="card-actions justify-end">
                                 <button className="custom-btn-outline">See Classes</button>
                             </div>
