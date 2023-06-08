@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import SocialSignIn from "../../shared/socialSignIn/SocialSignIn";
 
 
 const Login = () => {
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-base-200 md:py-12 py-5">
             <div className="card w-full max-w-sm shadow-2xl bg-base-100 border-[#fb00d979] border-2">
                 <form className="card-body">
                     <h2 className="text-3xl font-bold">Please Login!</h2>
@@ -29,6 +30,10 @@ const Login = () => {
                         <button className="custom-btn-outline">Login</button>
                     </div>
                 </form>
+
+                <div className="divider">OR</div>
+                <SocialSignIn />
+
                 <p className="text-center mb-4">New to SC360? please <Link to="/register" className="underline text-[#fb00d9]">Register</Link></p>
             </div>
         </div>
