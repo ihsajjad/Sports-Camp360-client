@@ -17,13 +17,13 @@ const NavBar = () => {
         </li>
         <li>
             <NavLink
-                to="/a"
+                to="/login"
                 className={({ isActive, }) =>
                     isActive
                     && "activeItem"
                 }
             >
-                About
+                Login
             </NavLink>
         </li>
         <li>
