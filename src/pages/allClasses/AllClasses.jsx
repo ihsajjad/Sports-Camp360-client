@@ -2,6 +2,7 @@ import { useContext } from "react";
 import SingleClass from "../../components/SingleClass";
 import useClasses from "../../hooks/useClasses";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const AllClasses = () => {
     const {user} = useContext(AuthContext);
@@ -22,6 +23,15 @@ const AllClasses = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            if(data.insertedId){
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Class selected successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
         })
 
     }

@@ -51,7 +51,7 @@ const router = createBrowserRouter([
 
             // student area
             {
-                path: '/dashboard/selected-class',
+                path: '/dashboard/selected-classes',
                 element: <SelectedClasses />
             }
         ]
