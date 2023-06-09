@@ -4,7 +4,6 @@ import useClasses from "../../../hooks/useClasses";
 
 
 const PopularClasses = () => {
-
     const [, classes] = useClasses();
 
     return (
