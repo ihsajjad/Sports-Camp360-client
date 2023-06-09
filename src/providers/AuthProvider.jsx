@@ -38,7 +38,26 @@ const AuthProvider = ({children}) => {
     useEffect(()=> {
         const unsubscribe = onAuthStateChanged(auth, currentUser=> {
             setUser(currentUser);
-            console.log(currentUser);
+
+            // sending user data to the server and setting the access token to localStorage
+            if(currentUser){
+                fetch('http://localhost:5000/jwt',{
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem('sports-access-token', data.token);
+                })
+            } 
+
+            if(!currentUser){
+                localStorage.removeItem('sports-access-token');
+            }
+
             setLoading(false);
         })
 

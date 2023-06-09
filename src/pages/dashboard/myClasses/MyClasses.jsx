@@ -4,8 +4,6 @@ import useMyClasses from "../../../hooks/useMyClasses";
 
 const MyClasses = () => {
     const [refetch, myClasses] = useMyClasses();
-    console.log(myClasses);
-    refetch()
 
     return (
         <div className="overflow-x-auto">
