@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 
 const AddNewClass = () => {
     const {user} = useContext(AuthContext);
+    const [error, setError] = useState('');
 
     const handleAddNew = (event) => {
         event.preventDefault();
+        setError('');
         const form = event.target;
         const instructor = user.displayName;
         const email = user.email;
@@ -15,9 +17,20 @@ const AddNewClass = () => {
         const availableSeats = parseInt(form.availableSeats.value);
         const price = parseFloat(form.price.value);
         const image = form.image.value;
+        const status = 'pending';
 
-        const newClass = {instructor, email, name, availableSeats, price, image};
+        const newClass = {instructor, email, name, availableSeats, price, image, status};
 
+        // Class data validation
+        if(isNaN(price)){
+            return setError("Price have to be a Number");
+        } else if(price < 0){
+            return setError("Price have to be a Positive Number");
+        } else if(availableSeats < 0){
+            return setError("Available seats can't be a negative number");
+        }
+
+        // Sending class data to the server
         fetch('http://localhost:5000/add-new-class', {
             method: 'POST',
             headers: {
@@ -38,6 +51,7 @@ const AddNewClass = () => {
                   })
             }
         });
+        form.reset();
     }
     return (
         <div className="hero min-h-screen p-5">
@@ -66,7 +80,7 @@ const AddNewClass = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">AvailableSeats*</span>
+                                <span className="label-text">Available Seats*</span>
                             </label>
                             <input type="number" name="availableSeats" placeholder="Available sits" className="input input-bordered" required />
                         </div>
@@ -84,8 +98,12 @@ const AddNewClass = () => {
                         </div>
                     </div>
 
+                    <p className="label text-red-600">
+                        {error}
+                    </p>
+
                     <div className="form-control mt-5">
-                        <button className="custom-btn-outline">Add New</button>
+                        <button className="custom-btn-outline">Add Class</button>
                     </div>
                 </form>
             </div>

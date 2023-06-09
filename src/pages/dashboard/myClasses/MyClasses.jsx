@@ -1,9 +1,30 @@
 import { FaTrashAlt } from "react-icons/fa";
 import useMyClasses from "../../../hooks/useMyClasses";
+import Swal from "sweetalert2";
 
 
 const MyClasses = () => {
     const [refetch, myClasses] = useMyClasses();
+
+    const handleDeleteClass = (id) => {
+        fetch(`http://localhost:5000/my-classes/${id}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            
+            if(data.deletedCount > 0){
+                refetch();
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Class deleted successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+        })
+    }
 
     return (
         <div className="overflow-x-auto">
@@ -16,6 +37,7 @@ const MyClasses = () => {
                         <th>Name</th>
                         <th>Enrolled</th>
                         <th>Available Sits</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -27,8 +49,9 @@ const MyClasses = () => {
                                 <td>{myClass.name}</td>
                                 <td>{myClass.enrolledStudents}</td>
                                 <td>{myClass.availableSeats}</td>
+                                <td>{myClass?.status}</td>
                                 <td>
-                                    <button className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
+                                    <button onClick={()=> handleDeleteClass(myClass._id)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
                                 </td>
                             </tr>)
                     }
