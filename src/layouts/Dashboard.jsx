@@ -2,7 +2,9 @@
 import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-    const isInstructor = true;
+    const isInstructor = false;
+    const isStudent = true;
+    const isAdmin = false;
 
     return (
         <div className="drawer lg:drawer-open">
@@ -23,6 +25,18 @@ const Dashboard = () => {
                         <>
                             <li><Link to="/dashboard/add-class">Add New Class</Link></li>
                             <li><Link to="/dashboard/my-classes">My Classes</Link></li>
+                        </>
+                        ||
+                        isStudent &&
+                        <>
+                            <li><Link to="/dashboard/selected-class">Selected Classes</Link></li>
+                            <li><Link to="/dashboard/enrolled-class">Enrolled Classes</Link></li>
+                        </>
+                        ||
+                        isAdmin &&
+                        <>
+                            <li><Link to="/dashboard/selected-class">Selected Classes</Link></li>
+                            <li><Link to="/dashboard/enrolled-class">Enrolled Classes</Link></li>
                         </>
                     }
                 </ul>

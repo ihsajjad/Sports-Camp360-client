@@ -8,6 +8,8 @@ import Dashboard from "../layouts/Dashboard";
 import PrivetRoute from "./PrivetRoute";
 import MyClasses from "../pages/dashboard/myClasses/MyClasses";
 import AddNewClass from "../pages/dashboard/addNewClass/AddNewClass";
+import SelectedClasses from "../pages/dashboard/student/selectedClasses";
+import AllClasses from "../pages/allClasses/AllClasses";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />
+            },
+            {
+                path: '/classes',
+                element: <AllClasses />
             },
             {
                 path: '/login',
@@ -33,6 +39,7 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivetRoute><Dashboard /></PrivetRoute>,
         children: [
+            // instructor area
             {
                 path: '/dashboard/add-class',
                 element: <AddNewClass />
@@ -40,6 +47,12 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/my-classes',
                 element: <MyClasses />
+            },
+
+            // student area
+            {
+                path: '/dashboard/selected-class',
+                element: <SelectedClasses />
             }
         ]
     }

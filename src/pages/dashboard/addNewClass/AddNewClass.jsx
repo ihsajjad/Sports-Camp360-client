@@ -17,9 +17,10 @@ const AddNewClass = () => {
         const availableSeats = parseInt(form.availableSeats.value);
         const price = parseFloat(form.price.value);
         const image = form.image.value;
-        const status = 'pending';
+        const status = 'Pending';
+        const enrolledStudents = 0;
 
-        const newClass = {instructor, email, name, availableSeats, price, image, status};
+        const newClass = {instructor, email, name, availableSeats, price, image, status, enrolledStudents};
 
         // Class data validation
         if(isNaN(price)){

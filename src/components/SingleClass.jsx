@@ -13,7 +13,7 @@ const SingleClass = ({singleClass}) => {
                             <p><span className="font-bold">Price :</span> ${price}
                             </p>
                             <div className="card-actions justify-end">
-                                <button className="custom-btn-outline">Add to Cart</button>
+                                <button className="custom-btn-outline">Select</button>
                             </div>
                         </div>
                     </div>

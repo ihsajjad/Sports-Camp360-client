@@ -7,23 +7,35 @@ const MyClasses = () => {
     const [refetch, myClasses] = useMyClasses();
 
     const handleDeleteClass = (id) => {
-        fetch(`http://localhost:5000/my-classes/${id}`,{
-            method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(data => {
 
-            if(data.deletedCount > 0){
-                refetch();
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Class deleted successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/my-classes/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
             }
         })
+
+
     }
 
     return (
@@ -43,15 +55,15 @@ const MyClasses = () => {
                 </thead>
                 <tbody>
                     {
-                        myClasses.map((myClass, i) => 
+                        myClasses.map((myClass, i) =>
                             <tr key={myClass._id}>
                                 <th>{i + 1}</th>
                                 <td>{myClass.name}</td>
                                 <td>{myClass.enrolledStudents}</td>
                                 <td>{myClass.availableSeats}</td>
-                                <td><div className={`bg-${myClass?.status === 'pending' && 'orange' || myClass?.status === 'approved' && 'green' || myClass?.status === 'denied' && 'red'}-600 text-white px-3 py-2 rounded-lg`}>{myClass?.status}</div></td>
+                                <td><div className={`bg-${myClass?.status === 'Pending' && 'orange' || myClass?.status === 'Approved' && 'green' || myClass?.status === 'Denied' && 'red'}-600 text-white px-3 py-2 rounded-lg`}>{myClass?.status}</div></td>
                                 <td>
-                                    <button onClick={()=> handleDeleteClass(myClass._id)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
+                                    <button onClick={() => handleDeleteClass(myClass._id)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
                                 </td>
                             </tr>)
                     }
