@@ -77,19 +77,19 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password*</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required/>
+                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Confirm Password*</span>
                             </label>
-                            <input type="password" name="confirm" placeholder="Confirm Password" className="input input-bordered" required/>
+                            <input type="password" name="confirm" placeholder="Confirm Password" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Photo Url*</span>
                             </label>
-                            <input type="url" name="photo" placeholder="Photo URL" className="input input-bordered" required/>
+                            <input type="url" name="photo" placeholder="Photo URL" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -97,16 +97,26 @@ const Register = () => {
                             </label>
                             <input type="text" name="address" placeholder="Address" className="input input-bordered" />
                         </div>
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Gender</span>
-                        </label>
-                        <select name="gender" id="" className="input input-bordered">
-                            <option value="female">Female</option>
-                            <option value="male">Male</option>
-                            <option value="custom">Custom</option>
-                        </select>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Gender</span>
+                            </label>
+                            <select name="gender" id="" className="input input-bordered">
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                                <option value="custom" selected>Custom</option>
+                            </select>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Who are you?*</span>
+                            </label>
+                            <select name="role" id="" className="input input-bordered">
+                                <option value="student">Student</option>
+                                <option value="instructor">Instructor</option>
+                            </select>
+                        </div>
                     </div>
                     <p className="label text-red-600">
                         {error}

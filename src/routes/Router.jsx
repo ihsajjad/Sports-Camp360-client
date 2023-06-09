@@ -7,6 +7,7 @@ import Register from "../pages/register/Register";
 import Dashboard from "../layouts/Dashboard";
 import PrivetRoute from "./PrivetRoute";
 import MyClasses from "../pages/dashboard/myClasses/MyClasses";
+import AddNewClass from "../pages/dashboard/addNewClass/AddNewClass";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivetRoute><Dashboard /></PrivetRoute>,
         children: [
+            {
+                path: '/dashboard/add-class',
+                element: <AddNewClass />
+            },
             {
                 path: '/dashboard/my-classes',
                 element: <MyClasses />
