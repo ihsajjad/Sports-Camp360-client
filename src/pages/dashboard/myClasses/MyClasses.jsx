@@ -12,7 +12,7 @@ const MyClasses = () => {
         })
         .then(res => res.json())
         .then(data => {
-            
+
             if(data.deletedCount > 0){
                 refetch();
                 Swal.fire({
@@ -49,7 +49,7 @@ const MyClasses = () => {
                                 <td>{myClass.name}</td>
                                 <td>{myClass.enrolledStudents}</td>
                                 <td>{myClass.availableSeats}</td>
-                                <td>{myClass?.status}</td>
+                                <td><div className={`bg-${myClass?.status === 'pending' && 'orange' || myClass?.status === 'approved' && 'green' || myClass?.status === 'denied' && 'red'}-600 text-white px-3 py-2 rounded-lg`}>{myClass?.status}</div></td>
                                 <td>
                                     <button onClick={()=> handleDeleteClass(myClass._id)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
                                 </td>
