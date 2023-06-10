@@ -24,3 +24,13 @@
     @apply btn btn-outline border-[#FB00D9] hover:bg-[#FB00D9] text-[#FB00D9] border-2
 }
 
+.custom-pending-btn {
+    @apply bg-orange-600 text-white px-3 py-2 rounded-lg
+}
+.custom-approved-btn {
+    @apply bg-green-600 text-white px-3 py-2 rounded-lg
+}
+.custom-denied-btn {
+    @apply bg-red-600 text-white px-3 py-2 rounded-lg
+}
+

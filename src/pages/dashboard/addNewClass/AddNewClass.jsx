@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const AddNewClass = () => {
     const {user} = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [axiosSecure] = useAxiosSecure();
 
     const handleAddNew = (event) => {
         event.preventDefault();
@@ -20,7 +22,6 @@ const AddNewClass = () => {
         const status = 'Pending';
         const enrolledStudents = 0;
 
-        const newClass = {instructor, email, name, availableSeats, price, image, status, enrolledStudents};
 
         // Class data validation
         if(isNaN(price)){
@@ -30,19 +31,12 @@ const AddNewClass = () => {
         } else if(availableSeats < 0){
             return setError("Available seats can't be a negative number");
         }
-
-        // Sending class data to the server
-        fetch('http://localhost:5000/add-new-class', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newClass)
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.acknowledged){
+        
+        // Sending new class data to the server
+        axiosSecure.post('/add-new-class', {instructor, email, name, availableSeats, price, image, status, enrolledStudents})
+        .then(res => {
+            console.log(res.data)
+            if(res.data.acknowledged){
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',

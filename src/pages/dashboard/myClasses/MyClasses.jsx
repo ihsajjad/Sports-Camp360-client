@@ -1,10 +1,12 @@
 import { FaTrashAlt } from "react-icons/fa";
 import useMyClasses from "../../../hooks/useMyClasses";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const MyClasses = () => {
     const [refetch, myClasses] = useMyClasses();
+    const [axiosSecure] = useAxiosSecure();
 
     const handleDeleteClass = (id) => {
 
@@ -18,12 +20,8 @@ const MyClasses = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/my-classes/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.deletedCount > 0) {
+                axiosSecure.delete(`/my-classes/${id}`).then(res => {
+                        if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire(
                                 'Deleted!',
@@ -34,7 +32,6 @@ const MyClasses = () => {
                     })
             }
         })
-
 
     }
 
@@ -61,7 +58,7 @@ const MyClasses = () => {
                                 <td>{myClass.name}</td>
                                 <td>{myClass.enrolledStudents}</td>
                                 <td>{myClass.availableSeats}</td>
-                                <td><div className={`bg-${myClass?.status === 'Pending' && 'orange' || myClass?.status === 'Approved' && 'green' || myClass?.status === 'Denied' && 'red'}-600 text-white px-3 py-2 rounded-lg`}>{myClass?.status}</div></td>
+                                <td><div className={`${myClass?.status === 'Pending' && 'custom-pending-btn' || myClass?.status === 'Approved' && 'custom-approved-btn' || myClass?.status === 'Denied' && 'custom-denied-btn'}`}>{myClass?.status}</div></td>
                                 <td>
                                     <button onClick={() => handleDeleteClass(myClass._id)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
                                 </td>

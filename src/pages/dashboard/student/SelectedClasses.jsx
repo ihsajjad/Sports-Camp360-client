@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../providers/AuthProvider";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useMySelectedClasses from "../../../hooks/useMySelectedClasses";
-
+import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const SelectedClasses = () => {
     const [refetch, selectedClasses] = useMySelectedClasses();
+    const [axiosSecure] = useAxiosSecure();
 
     const handleDeleteClass = (id) => {
         Swal.fire({
@@ -19,12 +19,9 @@ const SelectedClasses = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/selected/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.deletedCount > 0) {
+                axiosSecure.delete(`/selected/${id}`)
+                .then(res =>{
+                        if (res.data.deletedCount > 0) {
                             refetch();
                             Swal.fire(
                                 'Deleted!',
@@ -35,8 +32,6 @@ const SelectedClasses = () => {
                     })
             }
         })
-
-        
     }
 
     return (
@@ -61,7 +56,11 @@ const SelectedClasses = () => {
                                 <td>{selectedClass.name}</td>
                                 <td>{selectedClass.instructor}</td>
                                 <td>${selectedClass.price}</td>
-                                <td>
+                                <td className="flex space-x-2">
+                                    <Link to="/dashboard/payment" state={{price: selectedClass.price, classId: selectedClass._id, name: selectedClass.name}} >
+                                        <button className="text-white bg-orange-400 hover:bg-orange-600 rounded-lg text-center px-3 py-2">Pay</button>
+                                    </Link>
+
                                     <button onClick={() => handleDeleteClass(selectedClass._id)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
                                 </td>
                             </tr>)

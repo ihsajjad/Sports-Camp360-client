@@ -5,7 +5,7 @@ import app from "../firebase/firebase.config";
 const auth = getAuth(app);
 
 export const AuthContext = createContext();
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -35,36 +35,34 @@ const AuthProvider = ({children}) => {
 
 
     // Observing the user
-    useEffect(()=> {
-        const unsubscribe = onAuthStateChanged(auth, currentUser=> {
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
 
             // sending user data to the server and setting the access token to localStorage
-            if(currentUser){
-                fetch('http://localhost:5000/jwt',{
+            if (currentUser) {
+                fetch('http://localhost:5000/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify(currentUser)
+                    body: JSON.stringify({email: currentUser.email})
                 })
-                .then(res => res.json())
-                .then(data => {
-                    localStorage.setItem('sports-access-token', data.token);
-                })
-            } 
-
-            if(!currentUser){
-                localStorage.removeItem('sports-access-token');
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('access-token', data.token);
+                    })
+            } else {
+                localStorage.removeItem('access-token');
             }
 
             setLoading(false);
         })
 
-        return ()=> {
+        return () => {
             return unsubscribe();
         }
-    },[])
+    }, [])
 
     const authInfo = {
         user,

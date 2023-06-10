@@ -10,6 +10,7 @@ import MyClasses from "../pages/dashboard/myClasses/MyClasses";
 import AddNewClass from "../pages/dashboard/addNewClass/AddNewClass";
 import SelectedClasses from "../pages/dashboard/student/selectedClasses";
 import AllClasses from "../pages/allClasses/AllClasses";
+import Payment from "../pages/dashboard/student/payments/Payment";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/selected-classes',
                 element: <SelectedClasses />
+            },
+            {
+                path: '/dashboard/payment',
+                element: <Payment />
             }
         ]
     }
