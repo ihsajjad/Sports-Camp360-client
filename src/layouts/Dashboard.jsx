@@ -2,8 +2,8 @@
 import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-    const isInstructor = true;
-    const isStudent = false;
+    const isInstructor = false;
+    const isStudent = true;
     const isAdmin = false;
 
     return (
@@ -31,6 +31,7 @@ const Dashboard = () => {
                         <>
                             <li><Link to="/dashboard/selected-classes">Selected Classes</Link></li>
                             <li><Link to="/dashboard/enrolled-classes">Enrolled Classes</Link></li>
+                            <li><Link to="/dashboard/history">History</Link></li>
                         </>
                         ||
                         isAdmin &&

@@ -29,7 +29,6 @@ const AllClasses = () => {
         })
 
     }
-    console.log(classes);
 
     return (
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8 p-5">

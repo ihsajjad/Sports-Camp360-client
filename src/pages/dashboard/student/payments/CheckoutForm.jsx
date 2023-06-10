@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { FaPauseCircle } from "react-icons/fa";
 
 
-const CheckoutForm = ({ price, classId, name}) => {
+const CheckoutForm = ({ price, classId, name }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [axiosSecure] = useAxiosSecure();
@@ -13,7 +14,7 @@ const CheckoutForm = ({ price, classId, name}) => {
     const [cardError, setCardError] = useState('');
     const { user } = useContext(AuthContext);
     const [processing, setProcessing] = useState(false);
-    
+
 
     useEffect(() => {
         axiosSecure.post('/create-payment-intent', { price })
@@ -47,7 +48,7 @@ const CheckoutForm = ({ price, classId, name}) => {
 
         setProcessing(true);
 
-        const {paymentIntent, error:confirmError} = await stripe.confirmCardPayment(
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
                 payment_method: {
@@ -66,32 +67,44 @@ const CheckoutForm = ({ price, classId, name}) => {
         console.log(paymentIntent);
         setProcessing(false);
 
-        if(paymentIntent.status === "succeeded"){
+        if (paymentIntent?.status === "succeeded") {
             const transitionId = paymentIntent.id;
-            if(transitionId){
+            if (transitionId) {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',
                     title: 'Your Payment Is Successful',
                     showConfirmButton: false,
                     timer: 1500
-                  })
+                })
+
+                const dateCalculation = new Date(paymentIntent.created * 1000);
+
+                const date = dateCalculation.toLocaleDateString('en-GB');
 
                 // save payment data to the server
                 const payment = {
                     email: user?.email,
                     transitionId,
                     price,
-                    name
-                }
-                console.log(payment);
+                    classId,
+                    name,
+                    date
+                } 
+                
+                axiosSecure.post('/payments', {payment})
+                
             }
         }
     }
 
     return (
         <>
-            <form className="w-2/4 mx-auto" onSubmit={handleSubmit}>
+            <form className="w-2/4 mx-auto border-2 rounded-lg bg-slate-200" onSubmit={handleSubmit}>
+                <div className="w-full flex justify-between">
+                    <input className="input" defaultValue={`Class : ${name}`} readOnly />
+                    <input className="input input-bordered" defaultValue={`Price: $${price}`} readOnly />
+                </div>
                 <CardElement
                     options={{
                         style: {
