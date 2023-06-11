@@ -78,6 +78,7 @@ const CheckoutForm = ({ price, classId, name }) => {
                     timer: 1500
                 })
 
+                // Payment date calculation
                 const dateCalculation = new Date(paymentIntent.created * 1000);
 
                 const options = {
@@ -91,7 +92,7 @@ const CheckoutForm = ({ price, classId, name }) => {
 
                 const date = dateCalculation.toLocaleDateString('en-GB', options);
 
-                // save payment data to the server
+                // Payment data
                 const payment = {
                     email: user?.email,
                     transitionId,
@@ -100,8 +101,12 @@ const CheckoutForm = ({ price, classId, name }) => {
                     name,
                     date
                 } 
-                
+
+                // Save payment data to the server
                 axiosSecure.post('/payments', {payment})
+
+                // Delete class from selected class
+                axiosSecure.delete(`/selected/${classId}`)
                 
             }
         }

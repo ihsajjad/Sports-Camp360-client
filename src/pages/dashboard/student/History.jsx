@@ -4,11 +4,15 @@ import useHistory from "../../../hooks/useHistory";
 
 const History = () => {
     const enrolledClasses = useHistory();
+    const total = enrolledClasses.reduce((sum, enrolledClass) => sum + enrolledClass?.payment?.price, 0);
 
-    console.log(enrolledClasses);
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-2xl">Total Enrolled: {enrolledClasses.length}</h3>
+            <h3 className="text-3xl text-center my-5">Your Payment History</h3>
+            <div className="flex justify-between">
+            <h3 className="text-2xl inline-block">Total Enrolled: {enrolledClasses.length}</h3>
+            <h3 className="text-2xl inline-block">Total Cost: ${total.toFixed(2)}</h3>
+            </div>
             <table className="table table-zebra">
                 {/* head */}
                 <thead>

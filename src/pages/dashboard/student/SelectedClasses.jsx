@@ -36,7 +36,8 @@ const SelectedClasses = () => {
 
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-2xl">Total Classes: {selectedClasses.length}</h3>
+            <h3 className="text-3xl text-center my-5">Classes, Those You Have Selected</h3>
+            <h3 className="text-2xl">Total Selected: {selectedClasses.length}</h3>
             <table className="table table-zebra">
                 {/* head */}
                 <thead>
