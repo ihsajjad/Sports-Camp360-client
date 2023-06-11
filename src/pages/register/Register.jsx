@@ -3,10 +3,13 @@ import SocialSignIn from '../../shared/socialSignIn/SocialSignIn';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
     const [error, setError] = useState();
+    const [axiosSecure] = useAxiosSecure();
     const navigate = useNavigate();
 
     // creating user using email and password
@@ -18,6 +21,7 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const confirm = form.confirm.value;
+        const role = form.role.value;
 
         // Password validation
         if (password !== confirm) {
@@ -38,7 +42,6 @@ const Register = () => {
             .then(result => {
                 form.reset();
                 const createdUser = result.user;
-                navigate('/', { replace: true })
                 if (createdUser) {
                     Swal.fire({
                         position: 'top-end',
@@ -47,6 +50,11 @@ const Register = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+
+                    navigate('/', {replace: true})
+
+                    // Taking user data
+                    axiosSecure.post('/users', {email, name, role});
                 }
             })
             .catch(error => {
@@ -110,9 +118,9 @@ const Register = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Who are you?*</span>
+                                <span className="label-text">What is your role?*</span>
                             </label>
-                            <select name="role" id="" className="input input-bordered">
+                            <select name="role" id="" className="input input-bordered" required>
                                 <option value="student">Student</option>
                                 <option value="instructor">Instructor</option>
                             </select>

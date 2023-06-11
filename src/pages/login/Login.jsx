@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialSignIn from "../../shared/socialSignIn/SocialSignIn";
 import Swal from "sweetalert2";
 import { useContext, useState } from "react";
@@ -10,7 +10,9 @@ const Login = () => {
     const {signIn} = useContext(AuthContext);
     const [error, setError] = useState();
     const [show, setShow] = useState(true);
+    const location = useLocation();
     const navigate = useNavigate();
+    const from = location.state?.from;
 
     // creating user using email and password
     const handleSignIn = (event) => {
@@ -19,13 +21,11 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
 
         signIn(email, password)
         .then(result => {
             form.reset();
             const loggedUser = result.user;
-            navigate('/', {replace: true})
             if(loggedUser){
                 Swal.fire({
                     position: 'top-end',
@@ -35,6 +35,7 @@ const Login = () => {
                     timer: 1500
                   })
             }
+            navigate(from, {replace: true})
         })
         .catch(error => {
             setError(error.message);

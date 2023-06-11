@@ -1,11 +1,11 @@
 import { FaSave, FaTrashAlt } from "react-icons/fa";
-import useClasses from "../../../hooks/useClasses";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useMenageClasses from "../../../hooks/useMenageClasses";
 
 
 const MenageClasses = () => {
-    const [refetch, classes] = useClasses();
+    const [refetch, classes] = useMenageClasses();
     const [axiosSecure] = useAxiosSecure();
 
     // Retrieve the number of status
@@ -38,12 +38,8 @@ const MenageClasses = () => {
             }
         })
     }
-    const handleStatus = (event) => {
-        const selectedValue = event.target.value;
-        const name = event.target.name; // To identify the specific class
 
-        console.log(`Status for ${name}:`, selectedValue);
-    };
+    
 
     // Save updated data to the server
     const handleSave = (id) => {
@@ -76,14 +72,14 @@ const MenageClasses = () => {
 
     return (
         <div className="overflow-x-auto w-full ml-5">
-            <div className="flex justify-between m-5">
+            <div className="flex justify-between m-5 text-2xl">
                 <div>
-                    <h2 className="text-2xl">Total Classes: {classes.length}</h2>
-                    <h2 className="text-2xl">Approved Classes: {approvedClasses.length}</h2>
+                    <h2>Total Classes: {classes.length}</h2>
+                    <h2>Approved Classes: {approvedClasses.length}</h2>
                 </div>
                 <div>
-                    <h2 className="text-2xl">Pending Classes: {pendingClasses.length}</h2>
-                    <h2 className="text-2xl">Denied Classes: {deniedClasses.length}</h2>
+                    <h2>Pending Classes: {pendingClasses.length}</h2>
+                    <h2>Denied Classes: {deniedClasses.length}</h2>
                 </div>
             </div>
 
@@ -124,7 +120,7 @@ const MenageClasses = () => {
                             <td className="flex space-x-2">
 
                                 {/* Changing class status */}
-                                <select name={`status_${singleClass._id}`} defaultValue={singleClass.status} onChange={handleStatus}>
+                                <select name={`status_${singleClass._id}`} defaultValue={singleClass.status}>
                                     <option value="Approved" selected={singleClass?.status === 'Approved'}>Approved</option>
                                     <option value="Pending" selected={singleClass?.status === 'Pending'}>Pending</option>
                                     <option value="Denied" selected={singleClass?.status === 'Denied'}>Denied</option>

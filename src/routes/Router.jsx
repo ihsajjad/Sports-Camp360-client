@@ -14,6 +14,7 @@ import Payment from "../pages/dashboard/student/payments/Payment";
 import History from "../pages/dashboard/student/History";
 import EnrolledClasses from "../pages/dashboard/student/EnrolledClasses";
 import MenageClasses from "../pages/dashboard/admin/MenageClasses";
+import MenageUsers from "../pages/dashboard/admin/MenageUsers";
 
 const router = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/menage-classes',
                 element: <MenageClasses />
+            },
+            {
+                path: '/dashboard/menage-users',
+                element: <MenageUsers />
             }
         ]
     }
