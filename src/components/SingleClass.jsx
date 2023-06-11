@@ -1,5 +1,6 @@
 
 const SingleClass = ({singleClass, handleSelect}) => {
+    
     const {image, name, instructor, availableSeats, enrolledStudents, price} = singleClass;
     
     return (
@@ -14,7 +15,7 @@ const SingleClass = ({singleClass, handleSelect}) => {
                             </p>
                             <div className="card-actions justify-end">
                             </div>
-                                <button onClick={()=> handleSelect(singleClass)} className="custom-btn-outline">Select</button>
+                                <button onClick={()=>handleSelect(singleClass)} className="custom-btn-outline">Select</button>
                         </div>
                     </div>
     );

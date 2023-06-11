@@ -29,9 +29,9 @@ const Dashboard = () => {
                         ||
                         isStudent &&
                         <>
-                            <li><Link to="/dashboard/selected-classes">Selected Classes</Link></li>
-                            <li><Link to="/dashboard/enrolled-classes">Enrolled Classes</Link></li>
-                            <li><Link to="/dashboard/history">History</Link></li>
+                            <li><Link to="/dashboard/selected-classes">My Selected Classes</Link></li>
+                            <li><Link to="/dashboard/enrolled-classes">My Enrolled Classes</Link></li>
+                            <li><Link to="/dashboard/history">My Payment History</Link></li>
                         </>
                         ||
                         isAdmin &&

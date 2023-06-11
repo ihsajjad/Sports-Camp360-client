@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import SingleClass from "../../components/SingleClass";
 import useClasses from "../../hooks/useClasses";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import SingleClass from "../../components/SingleClass";
 
 const AllClasses = () => {
     const {user} = useContext(AuthContext);
@@ -12,10 +12,8 @@ const AllClasses = () => {
 
     const handleSelect = (item) => {
         const {image, name, price, instructor} = item;
-
-        const selectedItem = {name, image, price, instructor, studentEmail: user.email};
         
-        axiosSecure.post('/selected', {selectedItem})
+        axiosSecure.post('/selected', {name, image, price, instructor, studentEmail: user.email})
         .then(res => {
             if(res.data.insertedId){
                 Swal.fire({
@@ -33,7 +31,7 @@ const AllClasses = () => {
     return (
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8 p-5">
             {
-                classes.map((singleClass, i) => <SingleClass key={i} singleClass={singleClass} handleSelect={handleSelect}/>)
+                classes.map((singleClass) => <SingleClass key={singleClass._id} singleClass={singleClass} handleSelect={handleSelect}> </SingleClass>)
             }
         </div>
     );

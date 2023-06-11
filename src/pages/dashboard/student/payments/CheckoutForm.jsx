@@ -80,7 +80,16 @@ const CheckoutForm = ({ price, classId, name }) => {
 
                 const dateCalculation = new Date(paymentIntent.created * 1000);
 
-                const date = dateCalculation.toLocaleDateString('en-GB');
+                const options = {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                  };
+
+                const date = dateCalculation.toLocaleDateString('en-GB', options);
 
                 // save payment data to the server
                 const payment = {

@@ -11,7 +11,7 @@ const useHistory = () => {
     const { data: history = [] } = useQuery({
         queryKey: ['classes', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure(`/payments`);
+            const res = await axiosSecure(`/payments?email=${user?.email}`);
             return res.data;
         }
     })
