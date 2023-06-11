@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import Swal from "sweetalert2";
-import { FaPauseCircle } from "react-icons/fa";
 
 
 const CheckoutForm = ({ price, classId, name }) => {
@@ -107,7 +106,6 @@ const CheckoutForm = ({ price, classId, name }) => {
 
                 // Delete class from selected class
                 axiosSecure.delete(`/selected/${classId}`)
-                
             }
         }
     }

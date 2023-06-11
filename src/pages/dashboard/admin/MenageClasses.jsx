@@ -1,0 +1,147 @@
+import { FaSave, FaTrashAlt } from "react-icons/fa";
+import useClasses from "../../../hooks/useClasses";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+
+const MenageClasses = () => {
+    const [refetch, classes] = useClasses();
+    const [axiosSecure] = useAxiosSecure();
+
+    // Retrieve the number of status
+    let approvedClasses = classes.filter(item => item.status === 'Approved');
+    let pendingClasses = classes.filter(item => item.status === 'Pending');
+    let deniedClasses = classes.filter(item => item.status === 'Denied');
+
+    // Delete class permanently
+    const handleDeleteClass = (id, name) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You are deleting ${name}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/my-classes/${id}`).then(res => {
+                    if (res.data.deletedCount > 0) {
+                        refetch();
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            }
+        })
+    }
+    const handleStatus = (event) => {
+        const selectedValue = event.target.value;
+        const name = event.target.name; // To identify the specific class
+
+        console.log(`Status for ${name}:`, selectedValue);
+    };
+
+    // Save updated data to the server
+    const handleSave = (id) => {
+        const selectedValue = document.querySelector(`[name="status_${id}"]`).value;
+        Swal.fire({
+            title: `Are you sure to change the status?`,
+            text: ` ${selectedValue === 'Approved' && "This class will be available for the users" || selectedValue === 'Pending' && "This class will be pending and hide from the website" || selectedValue === 'Denied' && "This class will be denied and  hide from the website"}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Update it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/classes/${id}`, { status: selectedValue }).then(res => {
+                    if (res.data.modifiedCount > 0) {
+                        refetch();
+                        Swal.fire(
+                            `${selectedValue}!`,
+                            `The Class is ${selectedValue}.`,
+                            'success'
+                        )
+                    }
+                })
+            }
+        })
+
+    };
+
+
+    return (
+        <div className="overflow-x-auto w-full ml-5">
+            <div className="flex justify-between m-5">
+                <div>
+                    <h2 className="text-2xl">Total Classes: {classes.length}</h2>
+                    <h2 className="text-2xl">Approved Classes: {approvedClasses.length}</h2>
+                </div>
+                <div>
+                    <h2 className="text-2xl">Pending Classes: {pendingClasses.length}</h2>
+                    <h2 className="text-2xl">Denied Classes: {deniedClasses.length}</h2>
+                </div>
+            </div>
+
+            <table className="table">
+                {/* head */}
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Image</th>
+                        <th>Class</th>
+                        <th>Instructor</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        classes.map((singleClass, i) => <tr key={singleClass._id}>
+                            <td>
+                                {i + 1}
+                            </td>
+                            <td>
+                                <div className="w-20 h-16">
+                                    <img src={singleClass.image} alt="cover photo" className="h-full w-full rounded-lg" />
+                                </div>
+                            </td>
+                            <td>
+                                {singleClass.name}
+                            </td>
+                            <td>
+                                {singleClass.instructor}
+                            </td>
+                            <td>${singleClass.price}</td>
+
+                            {/* Displaying status btn conditionally */}
+                            <td><div className={`${singleClass?.status === 'Pending' && 'custom-pending-btn' || singleClass?.status === 'Approved' && 'custom-approved-btn' || singleClass?.status === 'Denied' && 'custom-denied-btn'}`}>{singleClass?.status}</div></td>
+                            <td className="flex space-x-2">
+
+                                {/* Changing class status */}
+                                <select name={`status_${singleClass._id}`} defaultValue={singleClass.status} onChange={handleStatus}>
+                                    <option value="Approved" selected={singleClass?.status === 'Approved'}>Approved</option>
+                                    <option value="Pending" selected={singleClass?.status === 'Pending'}>Pending</option>
+                                    <option value="Denied" selected={singleClass?.status === 'Denied'}>Denied</option>
+                                </select>
+
+                                {/* delete class handler */}
+                                <button onClick={() => handleDeleteClass(singleClass._id, singleClass.name)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
+
+                                {/* Save change handler */}
+                                <button onClick={() => handleSave(singleClass._id)} className="text-white bg-green-700 hover:bg-green-800 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaSave /></button>
+                            </td>
+                        </tr>)
+                    }
+                </tbody>
+            </table >
+        </div >
+    );
+};
+
+export default MenageClasses;

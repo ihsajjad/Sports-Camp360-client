@@ -13,6 +13,7 @@ import AllClasses from "../pages/allClasses/AllClasses";
 import Payment from "../pages/dashboard/student/payments/Payment";
 import History from "../pages/dashboard/student/History";
 import EnrolledClasses from "../pages/dashboard/student/EnrolledClasses";
+import MenageClasses from "../pages/dashboard/admin/MenageClasses";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,12 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/history',
                 element: <History />
+            }, 
+
+            // Admin area 
+            {
+                path: '/dashboard/menage-classes',
+                element: <MenageClasses />
             }
         ]
     }

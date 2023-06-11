@@ -3,8 +3,8 @@ import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
     const isInstructor = false;
-    const isStudent = true;
-    const isAdmin = false;
+    const isStudent = false;
+    const isAdmin = true;
 
     return (
         <div className="drawer lg:drawer-open">
@@ -36,8 +36,8 @@ const Dashboard = () => {
                         ||
                         isAdmin &&
                         <>
-                            <li><Link to="/dashboard/selected-class">Selected Classes</Link></li>
-                            <li><Link to="/dashboard/enrolled-class">Enrolled Classes</Link></li>
+                            <li><Link to="/dashboard/menage-classes">Menage Classes</Link></li>
+                            <li><Link to="/dashboard/menage-users">Menage Users</Link></li>
                         </>
                     }
                 </ul>
