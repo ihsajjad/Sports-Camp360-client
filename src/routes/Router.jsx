@@ -16,6 +16,7 @@ import EnrolledClasses from "../pages/dashboard/student/EnrolledClasses";
 import MenageClasses from "../pages/dashboard/admin/MenageClasses";
 import MenageUsers from "../pages/dashboard/admin/MenageUsers";
 import Instructors from "../pages/instructors/Instructors";
+import InstructorProfile from "../pages/instructors/InstructorProfile";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,12 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />
+            },
+            {
+                path: '/instructors/:id',
+                element: <InstructorProfile />
             }
+
         ]
     },
     {

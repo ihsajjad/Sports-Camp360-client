@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 
-const Instructor = ({instructor}) => {
-    const {image, name, email, numClasses, numStudents, classNames} = instructor;
+const Instructor = ({ instructor }) => {
+    const { image, name, email, numClasses, numStudents, classNames, _id } = instructor;
 
     return (
         <div className=" border border-[#fb00d993] rounded-lg">
@@ -10,7 +11,7 @@ const Instructor = ({instructor}) => {
                 <p><span className="font-bold">Email : </span>{email}</p>
                 <p><span className="font-bold">Number of the Classes :</span>  {numClasses}</p>
                 <p><span className="font-bold">Number of the Students:</span>  {numStudents}</p>
-                <p><span className="font-bold">Name of the Classes:</span></p>
+                <p><span className="font-bold">Popular Classes:</span></p>
                 <ul>
                     {
                         classNames?.map((item, i) => <li key={i}>{i + 1}. {item}</li>)
@@ -18,7 +19,9 @@ const Instructor = ({instructor}) => {
                 </ul>
 
                 <div className="card-actions justify-end">
-                    <button className="custom-btn-outline">See Classes</button>
+                    <Link to={`/instructors/${_id}`}>
+                        <button className="custom-btn-outline">See Classes</button>
+                    </Link>
                 </div>
             </div>
         </div>
