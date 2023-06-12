@@ -21,6 +21,7 @@ const AddNewClass = () => {
         const image = form.image.value;
         const status = 'Pending';
         const enrolledStudents = 0;
+        const feedback = "";
 
 
         // Class data validation
@@ -33,7 +34,7 @@ const AddNewClass = () => {
         }
         
         // Sending new class data to the server
-        axiosSecure.post('/add-new-class', {instructor, email, name, availableSeats, price, image, status, enrolledStudents})
+        axiosSecure.post('/add-new-class', {instructor, email, name, availableSeats, price, image, status, enrolledStudents, feedback})
         .then(res => {
             console.log(res.data)
             if(res.data.acknowledged){

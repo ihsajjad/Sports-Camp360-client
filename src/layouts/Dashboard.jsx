@@ -1,8 +1,24 @@
 
 import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../hooks/useAdmin';
+import { useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
 const Dashboard = () => {
+
+    const [scrollPosition, setScrollPosition] = useState(0);
+
+    const handleSwipe = useSwipeable({
+      onSwipedLeft: () => {
+        // Handle swipe left logic
+        setScrollPosition(scrollPosition + 100); // Example: Increase scroll position by 100px
+      },
+      onSwipedRight: () => {
+        // Handle swipe right logic
+        setScrollPosition(scrollPosition - 100); // Example: Decrease scroll position by 100px
+      },
+    });
+
     const isInstructor = false;
     const isStudent = false;
     const isAdmin = useAdmin;
@@ -10,7 +26,7 @@ const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center">
+            <div className="drawer-content flex flex-col items-center justify-center overflow-x-scroll" {...handleSwipe}>
 
                 <Outlet />
 

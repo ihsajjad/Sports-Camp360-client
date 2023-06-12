@@ -1,4 +1,4 @@
-import { FaSave, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaSave, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useMenageClasses from "../../../hooks/useMenageClasses";
@@ -39,11 +39,10 @@ const MenageClasses = () => {
         })
     }
 
-    
-
     // Save updated data to the server
     const handleSave = (id) => {
         const selectedValue = document.querySelector(`[name="status_${id}"]`).value;
+
         Swal.fire({
             title: `Are you sure to change the status?`,
             text: ` ${selectedValue === 'Approved' && "This class will be available for the users" || selectedValue === 'Pending' && "This class will be pending and hide from the website" || selectedValue === 'Denied' && "This class will be denied and  hide from the website"}`,
@@ -70,8 +69,9 @@ const MenageClasses = () => {
     };
 
 
+
     return (
-        <div className="overflow-x-auto w-full ml-5">
+        <div className="w-full ml-5">
             <div className="flex justify-between m-5 text-2xl">
                 <div>
                     <h2>Total Classes: {classes.length}</h2>
@@ -83,7 +83,7 @@ const MenageClasses = () => {
                 </div>
             </div>
 
-            <table className="table">
+            <table className="table table-zebra">
                 {/* head */}
                 <thead>
                     <tr>
@@ -91,6 +91,8 @@ const MenageClasses = () => {
                         <th>Image</th>
                         <th>Class</th>
                         <th>Instructor</th>
+                        <th>Instructor Email</th>
+                        <th>Available Seats</th>
                         <th>Price</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -113,6 +115,12 @@ const MenageClasses = () => {
                             <td>
                                 {singleClass.instructor}
                             </td>
+                            <td>
+                                {singleClass.email}
+                            </td>
+                            <td>
+                                {singleClass.availableSeats}
+                            </td>
                             <td>${singleClass.price}</td>
 
                             {/* Displaying status btn conditionally */}
@@ -129,8 +137,25 @@ const MenageClasses = () => {
                                 {/* delete class handler */}
                                 <button onClick={() => handleDeleteClass(singleClass._id, singleClass.name)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
 
+                                {/* The button to open modal */}
+                                <label htmlFor={`${singleClass._id}`} className="bg-orange-600 hover:bg-orange-700 h-8 w-8 rounded-full text-white  flex items-center justify-center text-lg"><FaEdit /></label>
+
+                                {/* Put this part before </body> tag */}
+                                <input type="checkbox" id={`${singleClass._id}`} className="modal-toggle" />
+                                <div className="modal">
+                                    <div className="modal-box">
+                                        <h3 className="font-bold text-lg">Feedback for {singleClass.name}</h3>
+                                        <textarea name={`feedback_${singleClass._id}`} id="" cols="30" rows="3" className="textarea w-full mt-2" placeholder="Your class is..."></textarea>
+                                        <div  className="modal-action">
+                                            <label  onClick={() => handleSave(singleClass._id)}  htmlFor={`${singleClass._id}`} className="btn"> <FaSave /> Save</label>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {/* Save change handler */}
                                 <button onClick={() => handleSave(singleClass._id)} className="text-white bg-green-700 hover:bg-green-800 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaSave /></button>
+
+                                
                             </td>
                         </tr>)
                     }
@@ -141,3 +166,6 @@ const MenageClasses = () => {
 };
 
 export default MenageClasses;
+
+
+

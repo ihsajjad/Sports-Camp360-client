@@ -8,7 +8,7 @@ const useInstructorsData = () => {
         queryKey: ['instructors'],
         queryFn: async() =>{
 
-            const res = await axiosSecure("/instructors");
+            const res = await axiosSecure.get("/instructors");
             return res.data;
         }
     })

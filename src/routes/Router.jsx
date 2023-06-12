@@ -15,6 +15,7 @@ import History from "../pages/dashboard/student/History";
 import EnrolledClasses from "../pages/dashboard/student/EnrolledClasses";
 import MenageClasses from "../pages/dashboard/admin/MenageClasses";
 import MenageUsers from "../pages/dashboard/admin/MenageUsers";
+import Instructors from "../pages/instructors/Instructors";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
                 element: <AllClasses />
             },
             {
+                path: '/instructors',
+                element: <Instructors />
+            },
+            {
                 path: '/login',
                 element: <Login />
             },
@@ -44,17 +49,8 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivetRoute><Dashboard /></PrivetRoute>,
         children: [
-            // instructor area
-            {
-                path: '/dashboard/add-class',
-                element: <AddNewClass />
-            },
-            {
-                path: '/dashboard/my-classes',
-                element: <MyClasses />
-            },
 
-            // student area
+            // Students area
             {
                 path: '/dashboard/selected-classes',
                 element: <SelectedClasses />
@@ -72,7 +68,17 @@ const router = createBrowserRouter([
                 element: <History />
             }, 
 
-            // Admin area 
+            // Instructors area
+            {
+                path: '/dashboard/add-class',
+                element: <AddNewClass />
+            },
+            {
+                path: '/dashboard/my-classes',
+                element: <MyClasses />
+            },
+
+            // Admins area 
             {
                 path: '/dashboard/menage-classes',
                 element: <MenageClasses />

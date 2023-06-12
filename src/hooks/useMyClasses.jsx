@@ -11,7 +11,7 @@ const useMyClasses = () => {
     const {refetch, data: myClasses = []} = useQuery({
         queryKey: ['classes', user?.email],
         queryFn: async()=>{
-            const res = await axiosSecure(`/my-classes?email=${user?.email}`);
+            const res = await axiosSecure.get(`/my-classes?email=${user?.email}`);
             return res.data;
         } 
     })

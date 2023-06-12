@@ -86,7 +86,7 @@ const MenageUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
-                                <td className="flex space-x-2">
+                                <td className="flex items-center justify-center space-x-2">
 
                                     <button onClick={() => handleMakeAdmin(user._id)} className="text-white bg-green-700 hover:bg-green-800 rounded-lg text-xl px-3 flex items-center justify-center text-sm" disabled={disableMakeAdminBtn}><FaUserShield  className="text-xl"/>Make Admin</button>
 
