@@ -1,9 +1,11 @@
 import Instructor from "../../components/Instructor";
 import useInstructorsData from "../../hooks/useInstructorsData";
+import useTitle from "../../hooks/useTitle";
 
 
 const Instructors = () => {
     const [instructors] = useInstructorsData();
+    useTitle('All Instructors');
 
     return (
         <div className="md:py-12 py-8">

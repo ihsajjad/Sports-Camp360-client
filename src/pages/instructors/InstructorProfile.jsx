@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import useTitle from "../../hooks/useTitle";
 
 
 const InstructorProfile = () => {
     const {id} = useParams();
     const [axiosSecure] = useAxiosSecure();
     const [instructor, setInstructor] = useState({});
+    useTitle(`${instructor.name}`);
 
     useEffect(()=>{
         const fetchData = async () => {

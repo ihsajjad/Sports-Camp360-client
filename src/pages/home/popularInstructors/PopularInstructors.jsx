@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Instructor from "../../../components/Instructor";
 import SectionTitle from "../../../components/SectionTitle";
-import useInstructorsData from "../../../hooks/useInstructorsData";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const PopularInstructors = () => {
@@ -23,6 +23,9 @@ const PopularInstructors = () => {
                 {
                     instructors.map((instructor, i) => <Instructor key={i} instructor={instructor}/>)
                 }
+            </div>
+            <div className="text-center">
+                <Link to="/instructors" className="custom-btn-outline">See All Instructors</Link>
             </div>
         </div>
     );

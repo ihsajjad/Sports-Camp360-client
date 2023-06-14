@@ -2,11 +2,14 @@ import { FaEdit, FaSave, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useMenageClasses from "../../../hooks/useMenageClasses";
+import useTitle from "../../../hooks/useTitle";
 
 
 const MenageClasses = () => {
     const [refetch, classes] = useMenageClasses();
     const [axiosSecure] = useAxiosSecure();
+
+    useTitle('Manage Classes');
 
     // Retrieve the number of status
     let approvedClasses = classes.filter(item => item.status === 'Approved');
@@ -88,10 +91,10 @@ const MenageClasses = () => {
                 </div>
             </div>
 
-            <table className="table table-zebra custom-t-bg">
+            <table className="table table-zebra custom-t-bg overflow-x-scroll">
                 {/* head */}
                 <thead className="custom-t-head">
-                    <tr>
+                    <tr className="font-bold">
                         <th>SL</th>
                         <th>Image</th>
                         <th>Class</th>
@@ -140,10 +143,10 @@ const MenageClasses = () => {
                                 </select>
 
                                 {/* delete class handler */}
-                                <button onClick={() => handleDeleteClass(singleClass._id, singleClass.name)} className="text-white bg-red-400 hover:bg-red-600 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaTrashAlt /></button>
+                                <button onClick={() => handleDeleteClass(singleClass._id, singleClass.name)} className="custom-btn-delete"><FaTrashAlt /></button>
 
                                 {/* The button to open modal */}
-                                <label htmlFor={`${singleClass._id}`} className="bg-orange-600 hover:bg-orange-700 h-8 w-8 rounded-full text-white  flex items-center justify-center text-lg"><FaEdit /></label>
+                                <label htmlFor={`${singleClass._id}`} className="bg-orange-600 hover:bg-orange-700 btn-only-icon"><FaEdit /></label>
 
                                 {/* Put this part before </body> tag */}
                                 <input type="checkbox" id={`${singleClass._id}`} className="modal-toggle" />
@@ -158,7 +161,7 @@ const MenageClasses = () => {
                                 </div>
 
                                 {/* Save change handler */}
-                                <button onClick={() => handleSave(singleClass._id)} className="text-white bg-green-700 hover:bg-green-800 h-8 w-8 rounded-full flex items-center justify-center text-lg"><FaSave /></button>
+                                <button onClick={() => handleSave(singleClass._id)} className="bg-green-700 hover:bg-green-800 btn-only-icon"><FaSave /></button>
 
                                 
                             </td>

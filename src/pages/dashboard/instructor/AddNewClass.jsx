@@ -1,13 +1,18 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
-import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useTitle from "../../../hooks/useTitle";
+
+
 
 
 const AddNewClass = () => {
     const {user} = useContext(AuthContext);
     const [error, setError] = useState('');
     const [axiosSecure] = useAxiosSecure();
+
+    useTitle('Add New Class');
 
     const handleAddNew = (event) => {
         event.preventDefault();

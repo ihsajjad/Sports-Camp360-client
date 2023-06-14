@@ -9,7 +9,7 @@ const useAxiosSecure = () => {
   const [loadingAxios, setLoadingAxios] = useState(false);
 
   const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000/',
+    baseURL: 'https://sports-camp360-server-ihsajjad.vercel.app',
   });
 
   useEffect(() => {

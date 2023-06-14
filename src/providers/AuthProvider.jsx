@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
 
             // sending user data to the server and setting the access token to localStorage
             if (currentUser) {
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://sports-camp360-server-ihsajjad.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

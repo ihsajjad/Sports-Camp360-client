@@ -6,8 +6,6 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Dashboard from "../layouts/Dashboard";
 import PrivetRoute from "./PrivetRoute";
-import MyClasses from "../pages/dashboard/myClasses/MyClasses";
-import AddNewClass from "../pages/dashboard/addNewClass/AddNewClass";
 import SelectedClasses from "../pages/dashboard/student/selectedClasses";
 import AllClasses from "../pages/allClasses/AllClasses";
 import Payment from "../pages/dashboard/student/payments/Payment";
@@ -18,6 +16,8 @@ import MenageUsers from "../pages/dashboard/admin/MenageUsers";
 import Instructors from "../pages/instructors/Instructors";
 import InstructorProfile from "../pages/instructors/InstructorProfile";
 import InstructorRoute from "./InstructorRoute";
+import AddNewClass from "../pages/dashboard/instructor/AddNewClass";
+import MyClasses from "../pages/dashboard/instructor/MyClasses";
 
 const router = createBrowserRouter([
     {

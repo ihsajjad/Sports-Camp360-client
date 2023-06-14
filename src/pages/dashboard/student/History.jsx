@@ -1,9 +1,12 @@
 
 import useHistory from "../../../hooks/useHistory";
+import useTitle from "../../../hooks/useTitle";
 
 
 const History = () => {
     const enrolledClasses = useHistory();
+    useTitle('Payment History');
+
     const total = enrolledClasses.reduce((sum, enrolledClass) => sum + enrolledClass?.payment?.price, 0);
 
     return (

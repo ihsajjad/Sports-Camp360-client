@@ -1,11 +1,14 @@
 import useHistory from "../../../hooks/useHistory";
 import useClasses from "../../../hooks/useClasses";
+import useTitle from "../../../hooks/useTitle";
 
 
 const EnrolledClasses = () => {
     const payedClasses = useHistory();
     const [, allClasses] = useClasses();
     
+    useTitle('Enrolled Classes');
+
     let enrolledClasses = [];
     
     for(const payedClass of payedClasses){

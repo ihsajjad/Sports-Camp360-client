@@ -4,16 +4,22 @@ import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import useDashboardAccess from '../hooks/useDashboardAccess';
 import Spinner from '../components/Spinner';
+import useTitle from '../hooks/useTitle';
 
 const Dashboard = () => {
     const {loading} = useContext(AuthContext);
     const {dashboardUser, isDashboardUserLoading} = useDashboardAccess();
+
+    useTitle(`Dashboard`);
+
 
     if(loading || isDashboardUserLoading){
         return <div className="min-h-screen flex items-center justify-center"><Spinner /></div>
     }
 
     const {isInstructor, isStudent, isAdmin} = dashboardUser;
+
+    
 
     return (
         <div className="drawer lg:drawer-open">
@@ -35,7 +41,7 @@ const Dashboard = () => {
             </div>
             <div className="drawer-side z-20">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 h-full bg-[#3ec5c776] text-base-content">
+                <ul className="menu p-4 w-80 h-full bg-[#3EC5C7] text-base-content">
                     {/* Sidebar content here */}
                     <li><Link to="/"><FaHome />Home</Link></li>
                     {

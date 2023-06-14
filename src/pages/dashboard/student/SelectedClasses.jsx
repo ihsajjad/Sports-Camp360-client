@@ -3,10 +3,12 @@ import Swal from "sweetalert2";
 import useMySelectedClasses from "../../../hooks/useMySelectedClasses";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useTitle from "../../../hooks/useTitle";
 
 const SelectedClasses = () => {
     const [refetch, selectedClasses] = useMySelectedClasses();
     const [axiosSecure] = useAxiosSecure();
+    useTitle('Selected Classes');
 
     const handleDeleteClass = (id) => {
         Swal.fire({

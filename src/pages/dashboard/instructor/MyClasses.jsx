@@ -2,11 +2,14 @@ import { FaTrashAlt } from "react-icons/fa";
 import useMyClasses from "../../../hooks/useMyClasses";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useTitle from "../../../hooks/useTitle";
 
 
 const MyClasses = () => {
     const [refetch, myClasses] = useMyClasses();
     const [axiosSecure] = useAxiosSecure();
+
+    useTitle('My Classes');
 
     const handleDeleteClass = (id) => {
 

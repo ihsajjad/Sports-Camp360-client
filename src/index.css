@@ -48,3 +48,15 @@
 .custom-t-bg {
     @apply bg-[#3ec5c776]
 }
+
+.custom-btn-delete{
+    @apply text-white bg-red-500 hover:bg-red-600 btn-only-icon
+}
+
+.btn-with-icon{
+    @apply rounded-lg text-sm px-3 py-2 flex items-center justify-center text-white
+}
+
+.btn-only-icon {
+    @apply h-8 w-8 rounded-full text-white  flex items-center justify-center text-lg
+}

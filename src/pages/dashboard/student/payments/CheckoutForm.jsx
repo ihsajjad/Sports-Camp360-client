@@ -64,7 +64,6 @@ const CheckoutForm = ({ item }) => {
         if (confirmError) {
             console.log(confirmError);
         }
-        console.log(paymentIntent);
         setProcessing(false);
 
         if (paymentIntent?.status === "succeeded") {
@@ -108,6 +107,7 @@ const CheckoutForm = ({ item }) => {
                 // Delete class from selected class
                 axiosSecure.delete(`/selected/${_id}`)
 
+                
                 axiosSecure.patch(`/classes/updateSeats/${classId}`)
             }
         }
