@@ -26,7 +26,7 @@ const InstructorProfile = () => {
     
 
     return (
-        <div className="w-full">
+        <div className="w-full md:my-12 my-4">
             <div className="w-5/6 mx-auto space-y-3">
                 <img src={image} alt="" className=" w-full rounded-lg" />
                 <h3 className="text-3xl font-bold text-slate-700">Name: {name}</h3>

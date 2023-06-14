@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-10 text-slate-500">
+        <footer className="footer footer-center p-10 text-slate-500 bg-[#3ec5c7c1]">
             <div>
                 <span className="text-3xl font-bold text-slate-600">Sports<span className="sc-color">Camp</span>360</span>
                 <p className="font-bold">

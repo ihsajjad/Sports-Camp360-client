@@ -37,10 +37,12 @@ const MyClasses = () => {
 
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-2xl">Total Classes: {myClasses.length}</h3>
-            <table className="table table-zebra">
+
+            <h3 className="dashboard-content-title">Classes, Those You Have Published</h3>
+            <h3 className="dashboard-sub-title">Total Classes: {myClasses.length}</h3>
+            <table className="table table-zebra custom-t-bg">
                 {/* head */}
-                <thead>
+                <thead className="custom-t-head">
                     <tr>
                         <th>SL</th>
                         <th>Name</th>

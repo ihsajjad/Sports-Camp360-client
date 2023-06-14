@@ -32,7 +32,7 @@ const Banner = () => {
     };
 
     return (
-        <div className="slider h-[90vh] w-full relative rounded">
+        <div className="slider h-[90vh] w-full relative rounded md:mb-12">
             <img src={sliders[currentIndex].img} alt="Slider Image" className="h-full w-full rounded" />
             <div className="circle-buttons space-x-2 absolute left-2/4 bottom-6">
                 {

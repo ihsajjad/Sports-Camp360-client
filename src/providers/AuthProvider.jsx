@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
 
     // create user with email and password
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
@@ -51,12 +52,13 @@ const AuthProvider = ({ children }) => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('access-token', data.token);
+                        setLoading(false);
                     })
             } else {
                 localStorage.removeItem('access-token');
             }
 
-            setLoading(false);
+            
         })
 
         return () => {

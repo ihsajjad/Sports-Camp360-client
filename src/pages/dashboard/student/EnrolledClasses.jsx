@@ -17,13 +17,14 @@ const EnrolledClasses = () => {
         enrolledClasses.push(enrolledClass);
     }
 
+
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-3xl text-center my-5">Classes, Those You Have Enrolled</h3>
-            <h3 className="text-2xl">Total Classes: {enrolledClasses.length}</h3>
-            <table className="table table-zebra">
+            <h3 className="dashboard-content-title">Classes, Those You Have Enrolled</h3>
+            <h3 className="dashboard-sub-title">Total Classes: {enrolledClasses.length}</h3>
+            <table className="table table-zebra custom-t-bg">
                 {/* head */}
-                <thead>
+                <thead className="custom-t-head">
                     <tr>
                         <th>SL</th>
                         <th>Class Name</th>

@@ -36,11 +36,11 @@ const SelectedClasses = () => {
 
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-3xl text-center my-5">Classes, Those You Have Selected</h3>
-            <h3 className="text-2xl">Total Selected: {selectedClasses.length}</h3>
-            <table className="table table-zebra">
+            <h3 className="dashboard-content-title">Take Actions for selected classes</h3>
+            <h3 className="dashboard-sub-title">Total Selected: {selectedClasses.length}</h3>
+            <table className="table table-zebra custom-t-bg">
                 {/* head */}
-                <thead>
+                <thead className="custom-t-head">
                     <tr>
                         <th>SL</th>
                         <th>Class Name</th>
@@ -58,7 +58,7 @@ const SelectedClasses = () => {
                                 <td>{selectedClass.instructor}</td>
                                 <td>${selectedClass.price}</td>
                                 <td className="flex space-x-2">
-                                    <Link to="/dashboard/payment" state={{price: selectedClass.price, classId: selectedClass._id, name: selectedClass.name}} >
+                                    <Link to="/dashboard/payment" state={{item: selectedClass}} >
                                         <button className="text-white bg-orange-400 hover:bg-orange-600 rounded-lg text-center px-3 py-2">Pay</button>
                                     </Link>
 

@@ -8,14 +8,14 @@ const History = () => {
 
     return (
         <div className="overflow-x-auto">
-            <h3 className="text-3xl text-center my-5">Your Payment History</h3>
+            <h3 className="dashboard-content-title">Your Payment History</h3>
             <div className="flex justify-between">
-            <h3 className="text-2xl inline-block">Total Enrolled: {enrolledClasses.length}</h3>
-            <h3 className="text-2xl inline-block">Total Cost: ${total.toFixed(2)}</h3>
+                <h3 className="dashboard-sub-title">Total Enrolled: {enrolledClasses.length}</h3>
+                <h3 className="dashboard-sub-title">Total Cost: ${total.toFixed(2)}</h3>
             </div>
-            <table className="table table-zebra">
+            <table className="table table-zebra overflow-x-scroll custom-t-bg">
                 {/* head */}
-                <thead>
+                <thead className="custom-t-head">
                     <tr>
                         <th>SL</th>
                         <th>Name</th>

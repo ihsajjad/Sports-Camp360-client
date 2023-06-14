@@ -5,7 +5,7 @@ import { AuthContext } from "../../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 
-const CheckoutForm = ({ price, classId, name }) => {
+const CheckoutForm = ({ item }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [axiosSecure] = useAxiosSecure();
@@ -14,6 +14,7 @@ const CheckoutForm = ({ price, classId, name }) => {
     const { user } = useContext(AuthContext);
     const [processing, setProcessing] = useState(false);
 
+    const {price, name, _id, classId} = item;
 
     useEffect(() => {
         axiosSecure.post('/create-payment-intent', { price })
@@ -96,7 +97,7 @@ const CheckoutForm = ({ price, classId, name }) => {
                     email: user?.email,
                     transitionId,
                     price,
-                    classId,
+                    classId : _id,
                     name,
                     date
                 } 
@@ -105,26 +106,27 @@ const CheckoutForm = ({ price, classId, name }) => {
                 axiosSecure.post('/payments', {payment})
 
                 // Delete class from selected class
-                axiosSecure.delete(`/selected/${classId}`)
+                axiosSecure.delete(`/selected/${_id}`)
+
+                axiosSecure.patch(`/classes/updateSeats/${classId}`)
             }
         }
     }
 
     return (
-        <>
-            <form className="w-2/4 mx-auto border-2 rounded-lg bg-slate-200" onSubmit={handleSubmit}>
-                <div className="w-full flex justify-between">
-                    <input className="input" defaultValue={`Class : ${name}`} readOnly />
-                    <input className="input input-bordered" defaultValue={`Price: $${price}`} readOnly />
+        <div className="flex items-center justify-center min-h-screen">
+            <form className="card w-96 h-60 bg-[#3ec5c75e] border-2 border-[#3ec5c7de] shadow-xl p-4 space-y-10" onSubmit={handleSubmit}>
+                <div className="w-full flex justify-between text-2xl text-[#248b8cf5]">
+                    <h3>{`You are paying $${price} dollars for ${name} Class`}</h3>
                 </div>
                 <CardElement
                     options={{
                         style: {
                             base: {
                                 fontSize: '16px',
-                                color: '#424770',
+                                color: '#248b8cf5',
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: '#248b8cf5',
                                 },
                             },
                             invalid: {
@@ -133,12 +135,12 @@ const CheckoutForm = ({ price, classId, name }) => {
                         },
                     }}
                 />
-                <button className="btn border-[#FB00D9] bg-[#FB00D9] hover:bg-[#FB00D9] text-white border-2 btn-sm mt-5" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button className="btn border-[#248b8cf5] bg-[#248a8c65] hover:bg-[#106d6ffa] text-white border-2 btn-sm mt-5" type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
             </form>
             {cardError && <p className="text-red-600 text-center">{cardError}</p>}
-        </>
+        </div>
     );
 };
 

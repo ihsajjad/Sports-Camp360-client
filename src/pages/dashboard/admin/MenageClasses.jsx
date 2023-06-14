@@ -42,6 +42,8 @@ const MenageClasses = () => {
     // Save updated data to the server
     const handleSave = (id) => {
         const selectedValue = document.querySelector(`[name="status_${id}"]`).value;
+        const feedback = document.querySelector(`[name="feedback_${id}"]`).value;
+        console.log(feedback);
 
         Swal.fire({
             title: `Are you sure to change the status?`,
@@ -53,7 +55,9 @@ const MenageClasses = () => {
             confirmButtonText: 'Yes, Update it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.patch(`/classes/${id}`, { status: selectedValue }).then(res => {
+
+                axiosSecure.patch(`/classes/${id}`, { status: selectedValue, feedback })
+                .then(res => {
                     if (res.data.modifiedCount > 0) {
                         refetch();
                         Swal.fire(
@@ -72,20 +76,21 @@ const MenageClasses = () => {
 
     return (
         <div className="w-full ml-5">
-            <div className="flex justify-between m-5 text-2xl">
+            <h2 className="dashboard-content-title">Class Managements</h2>
+            <div className="flex justify-between m-5">
                 <div>
-                    <h2>Total Classes: {classes.length}</h2>
-                    <h2>Approved Classes: {approvedClasses.length}</h2>
+                    <h2 className="dashboard-sub-title">Total Classes: {classes.length}</h2>
+                    <h2 className="dashboard-sub-title">Approved Classes: {approvedClasses.length}</h2>
                 </div>
                 <div>
-                    <h2>Pending Classes: {pendingClasses.length}</h2>
-                    <h2>Denied Classes: {deniedClasses.length}</h2>
+                    <h2 className="dashboard-sub-title">Pending Classes: {pendingClasses.length}</h2>
+                    <h2 className="dashboard-sub-title">Denied Classes: {deniedClasses.length}</h2>
                 </div>
             </div>
 
-            <table className="table table-zebra">
+            <table className="table table-zebra custom-t-bg">
                 {/* head */}
-                <thead>
+                <thead className="custom-t-head">
                     <tr>
                         <th>SL</th>
                         <th>Image</th>

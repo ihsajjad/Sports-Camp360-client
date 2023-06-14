@@ -17,6 +17,7 @@ import MenageClasses from "../pages/dashboard/admin/MenageClasses";
 import MenageUsers from "../pages/dashboard/admin/MenageUsers";
 import Instructors from "../pages/instructors/Instructors";
 import InstructorProfile from "../pages/instructors/InstructorProfile";
+import InstructorRoute from "./InstructorRoute";
 
 const router = createBrowserRouter([
     {
@@ -53,41 +54,41 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivetRoute><Dashboard /></PrivetRoute>,
+        element: <Dashboard />,
         children: [
 
             // Students area
             {
                 path: '/dashboard/selected-classes',
-                element: <SelectedClasses />
+                element: <PrivetRoute><SelectedClasses /></PrivetRoute>
             },
             {
                 path: '/dashboard/payment',
-                element: <Payment />
+                element: <PrivetRoute><Payment /></PrivetRoute>
             },
             {
                 path: '/dashboard/enrolled-classes',
-                element: <EnrolledClasses />
+                element: <PrivetRoute><EnrolledClasses /></PrivetRoute>
             },
             {
                 path: '/dashboard/history',
-                element: <History />
+                element: <PrivetRoute><History /></PrivetRoute>
             }, 
 
             // Instructors area
             {
                 path: '/dashboard/add-class',
-                element: <AddNewClass />
+                element: <PrivetRoute><AddNewClass /></PrivetRoute>
             },
             {
                 path: '/dashboard/my-classes',
-                element: <MyClasses />
+                element: <InstructorRoute><MyClasses /></InstructorRoute>
             },
 
             // Admins area 
             {
                 path: '/dashboard/menage-classes',
-                element: <MenageClasses />
+                element: <PrivetRoute><MenageClasses /></PrivetRoute>
             },
             {
                 path: '/dashboard/menage-users',

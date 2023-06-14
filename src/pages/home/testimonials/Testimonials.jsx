@@ -1,28 +1,24 @@
 import SectionTitle from "../../../components/SectionTitle";
 import { FaFacebook, FaInstagram, FaStar, FaTwitter } from "react-icons/fa";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 
 const Testimonials = () => {
-    const testimonials = [
-        {
-            name: "Emma Johnson",
-            img: "https://rb.gy/8q7wm",
-            description: "Sports Camp 360 has been an incredible experience for me! I have learned so much and made lifelong friendships. Highly recommended!",
-        },
-        {
-            name: "Daniel Rodriguez",
-            img: "https://rb.gy/59p4j",
-            description: "Attending Sports Camp 360 was the best decision I ever made. The coaches are exceptional, and the training has taken my skills to the next level.",
-        },
-        {
-            name: "Sophia Chen",
-            img: "https://rb.gy/tyefa",
-            description: "Sports Camp 360 provided me with opportunities to explore various sports and discover my true passion. It's been an unforgettable journey!",
-        },
-    ];
+    const [axiosSecure] = useAxiosSecure();
+    const [testimonials, setTestimonials] = useState([]);
 
+    useEffect(()=>{
+        const fetchData = async() => {
+            const response = await axiosSecure.get('/testimonials');
+            setTestimonials(response.data);
+        }
+        fetchData();
+    },[]);
+
+    
     return (
-        <div className="md:py-12">
+        <div className="md:py-12 md:px-20 px-2 bg-[#F0F0F0]">
             <SectionTitle title={"Testimonials"} subTitle={"Hear From Beginner to Champion, Our Students Share Their Stories!"}> </SectionTitle>
             <div className="grid md:grid-cols-3 grid-cols-1 gap-8 p-5 md:px-8">
                 {

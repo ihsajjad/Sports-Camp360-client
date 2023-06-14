@@ -21,7 +21,7 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const confirm = form.confirm.value;
-        const role = form.role.value;
+        const role = 'student';
 
         // Password validation
         if (password !== confirm) {
@@ -105,7 +105,7 @@ const Register = () => {
                             </label>
                             <input type="text" name="address" placeholder="Address" className="input input-bordered" />
                         </div>
-
+                    </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Gender</span>
@@ -116,16 +116,6 @@ const Register = () => {
                                 <option value="custom" selected>Custom</option>
                             </select>
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">What is your role?*</span>
-                            </label>
-                            <select name="role" id="" className="input input-bordered" required>
-                                <option value="student">Student</option>
-                                <option value="instructor">Instructor</option>
-                            </select>
-                        </div>
-                    </div>
                     <p className="label text-red-600">
                         {error}
                     </p>

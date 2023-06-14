@@ -8,14 +8,12 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
 
     const location = useLocation();
-    const price = location.state.price;
-    const classId = location.state.classId;
-    const name = location.state.name;
+    const item = location.state.item;
     
     return (
         <div className="w-full">
             <Elements stripe={stripePromise}>
-                <CheckoutForm price={price} classId={classId} name={name}/>
+                <CheckoutForm item={item}/>
             </Elements>
         </div>
     );
